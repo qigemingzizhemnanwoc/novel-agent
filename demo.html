@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>叙 · 小说阅读与创作</title>
+<style>
+
+:root{color-scheme:light;--paper:#fafaf7;--ink:#242421;--muted:#686861;--line:#d9d8d1;--accent:#a94330;--soft:#f0eee8;--serif:"Songti SC","STSong","SimSun",serif}
+*{box-sizing:border-box}[hidden]{display:none!important}html{background:var(--paper);scroll-padding-top:96px}body{margin:0;color:var(--ink);font:15px/1.7 "Segoe UI","Microsoft YaHei",sans-serif}button,input,select,textarea{font:inherit;color:inherit}button,a,summary{-webkit-tap-highlight-color:transparent}button{cursor:pointer;padding:9px 15px;min-height:42px;border:1px solid var(--line);border-radius:3px;background:transparent}button:hover:not(:disabled){background:var(--soft);border-color:#9d9a90}button:disabled{opacity:.45;cursor:not-allowed}a{color:var(--accent)}button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:3px}input,select,textarea{max-width:100%;min-width:0;border:1px solid #bfbdb5;border-radius:3px;background:transparent;padding:9px 11px}textarea{width:100%;resize:vertical;line-height:1.8}input::placeholder,textarea::placeholder{color:#74746d}input[type=checkbox]{accent-color:var(--accent)}input[type=file]{width:100%;font-size:13px}label{font-size:13px}summary{cursor:pointer;padding:10px 0}h1,h2,h3,legend{font-family:var(--serif)}h1{font-size:38px;line-height:1.4;margin:20px 0 28px}h2{font-size:26px;margin:0 0 24px}h3{font-size:22px;margin:24px 0 12px}p{margin:12px 0}.hint{font-size:12px;color:var(--muted);line-height:1.8}.primary,#ask,#generateWriting,#pasteImport{background:var(--accent);border-color:var(--accent);color:#fff}.primary:hover:not(:disabled),#ask:hover:not(:disabled),#generateWriting:hover:not(:disabled){background:#8d3525;color:white}
+.app-header{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:24px;padding:0 32px;min-height:74px;border-bottom:1px solid #8e8d86;background:var(--paper)}.brand{font:700 36px var(--serif);text-decoration:none;color:var(--ink);padding-right:24px;border-right:1px solid var(--line)}#bookName{font-family:var(--serif);font-weight:600;max-width:25vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.view-nav{display:flex;gap:26px;margin:auto}.view-nav button{border:0;border-bottom:3px solid transparent;border-radius:0;padding:22px 4px 17px;font-size:16px}.view-nav button[aria-current=page]{border-bottom-color:var(--accent);color:var(--accent)}.header-actions{display:flex;gap:8px}.header-actions button{border:0;padding:8px}.statusbar{padding:10px 32px;border-bottom:1px solid var(--line);display:flex;gap:20px;justify-content:space-between;font-size:12px;color:var(--muted)}#status,#indexStatus{margin:0}main{max-width:1280px;margin:auto}.view{padding:28px 32px 56px}.reading-grid{display:grid;grid-template-columns:minmax(0,1fr) 240px;gap:40px}.reading-main{min-width:0;padding:0 clamp(12px,4vw,72px)}.reading-aside{border-left:1px solid var(--line);padding-left:28px}.reading-aside h2{font-size:22px}.reading-aside button{display:block;width:100%;text-align:left;border:0;border-radius:0;padding:9px 0;color:var(--muted)}.reading-aside button[aria-current]{color:var(--accent);font-weight:600}#sectionList{max-height:56vh;overflow:auto}#readerTitle{overflow-wrap:anywhere}#originalPreview>summary{font:13px "Segoe UI","Microsoft YaHei",sans-serif;color:var(--muted);margin-bottom:8px}#originalPreview>button{font-size:12px;padding:5px 10px;min-height:34px}#pageLabel{margin:0 12px;color:var(--muted);font-size:12px}#preview{font:18px/1.9 var(--serif);white-space:pre-wrap;overflow-wrap:anywhere;background:none;border:0;margin:22px 0 32px;max-height:44vh;overflow:auto;padding:0 16px 0 0;scrollbar-width:thin;scrollbar-color:#bbb8af transparent}#preview:empty::before{content:"原文会显示在这里。打开一部作品，开始阅读。";color:var(--muted)}#preview::selection,#preview *::selection{background:#eed6ce}#preview mark{background:#f4dfd5;color:var(--ink)}#continuationMarker{display:block;border-top:2px solid var(--accent);margin:20px 0;user-select:none}#continuationMarker::before{content:"从这里开始续写";font:12px/2 "Microsoft YaHei",sans-serif;color:var(--accent)}#previewSelectionStatus,#previewSearchStatus{font-size:12px;color:var(--muted)}#previewSearchForm{display:flex;gap:8px;margin:10px 0}#previewSearchForm input{flex:1;width:100%}#previewMatches{max-height:230px;overflow:auto}#previewMatches button{display:block;width:100%;text-align:left;margin:6px 0}#confirmPosition{color:var(--accent)}#form{border-top:1px solid var(--line);padding-top:18px;margin-top:22px}#form>label{display:block;font-size:14px;margin-bottom:8px}#question{min-height:72px}#form button{margin:8px 8px 0 0}#progress{font-size:13px;color:var(--accent)}#chat article{margin-top:28px;border-top:1px solid var(--line);padding:20px 0}article>strong{font-size:16px}.answer{font:17px/2 var(--serif)}pre,.answer{white-space:pre-wrap;overflow-wrap:anywhere}article pre{font:15px/1.9 var(--serif);max-height:500px;overflow:auto}article details{font-size:13px;margin:10px 0}article table{font-size:12px;display:block;overflow:auto}td,th{padding:6px;border-bottom:1px solid var(--line)}#memoryPanel{font-size:12px}#memoryText{max-height:200px;overflow:auto}#floors{position:static;border-top:1px solid var(--line);margin-top:28px;padding-top:16px;font-size:12px;color:var(--muted)}#floors>button{display:inline-block;width:44px;text-align:center}#floorList{max-height:180px;overflow:auto;display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}#floorList button{width:36px;text-align:center;padding:4px;border:1px solid var(--line)}
+.writing-grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:36px}.draft-stage{padding:0 32px;min-width:0}.draft-status{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;padding:0 0 15px;border-bottom:1px solid var(--line)}.position-context{padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:13px;margin:20px 0}.position-context p{margin:0}#positionExcerpt{font-family:var(--serif);color:var(--muted);margin-top:8px}#returnToOriginal{border:0;color:var(--accent);padding-left:0}.writing-controls{border-left:1px solid var(--line);padding-left:26px;min-width:0}.writing-controls>label{display:block;margin:14px 0 5px}.writing-controls select{width:100%;margin-top:6px}.writing-controls>button{margin:6px 4px 6px 0}.writing-controls #generateWriting{width:100%;margin-top:22px}.writing-controls .hint{margin:12px 0}.writing-controls input[type=checkbox]{margin-right:6px}#writingStatus{font-size:13px;color:var(--accent)}#materials{font-size:13px;max-height:240px;overflow:auto}.draft-stage article{padding:20px 0;border-bottom:1px solid var(--line)}.draft-stage article pre{font:18px/1.9 var(--serif);max-height:none;overflow:visible}.draft-stage article>p{font-size:12px;color:var(--muted)}.draft-stage article button{margin:8px 8px 0 0}#drafts:empty::after,#inspirations:empty::after{display:block;color:var(--muted);font:16px/2 var(--serif);padding:20px 0 48px}#drafts:empty::after{content:"写下你的方向，候选稿将在这里展开。原文保持不变。"}#inspirations:empty::after{content:"还没有灵感方案。选择“灵感提供”，从三个不同方向开始。"}
+fieldset{min-width:0;border:0;margin:0 0 30px;padding:0}legend{font-size:24px;margin-bottom:18px;padding:0}.settings-view{max-width:900px;margin:auto}.settings-view fieldset{padding-bottom:28px;border-bottom:1px solid var(--line)}.settings-view label{display:block;margin:12px 0 4px}.settings-view button,.settings-view select{margin:6px 0}#promptSettings{margin-bottom:30px}#promptSettings>summary{font:22px var(--serif);padding:16px 0}#promptSettings fieldset{margin-top:16px}.people-grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:48px}.people-grid>aside{padding-left:26px;border-left:1px solid var(--line)}#characters article{padding:20px 0;border-top:1px solid var(--line)}#characters button{margin:6px 8px 6px 0}#characterStatus{font-size:13px;color:var(--accent)}#emptyWelcome{padding:18px 0 26px;border-bottom:1px solid var(--line);margin-bottom:28px}#emptyWelcome h1{margin-top:0}#emptyWelcome p{color:var(--muted)}#renameDialog,#projectDeleteDialog,#deleteDialog{width:min(440px,calc(100% - 32px));padding:26px;border:1px solid var(--line);background:var(--paper);color:var(--ink);overflow-wrap:anywhere}#deleteDialog::backdrop{background:#0006}#deleteTitle{font-size:22px}#deleteDialog button{margin:16px 8px 0 0}#confirmDelete{color:var(--accent)}.source-fragment{scroll-margin-top:100px}#readerSearch{border-bottom:1px solid var(--line)}
+@media(max-width:900px){.app-header{gap:14px;padding:0 20px}.view-nav{gap:14px}.reading-grid{grid-template-columns:minmax(0,1fr) 190px;gap:24px}.reading-main{padding:0 10px}.writing-grid{grid-template-columns:minmax(0,1fr) 270px;gap:20px}.draft-stage{padding:0 10px}.people-grid{grid-template-columns:1fr}.people-grid>aside{border-left:0;padding:20px 0;border-top:1px solid var(--line)}}
+@media(max-width:650px){.app-header{padding:8px 16px 0;gap:10px;flex-wrap:wrap}.brand{font-size:30px;padding-right:12px}#bookName{max-width:40vw;font-size:14px}.header-actions{margin-left:auto}.header-actions button{font-size:12px;padding:5px;min-height:38px}.view-nav{order:3;width:100%;justify-content:center;gap:36px}.view-nav button{padding:8px 4px 10px;min-height:44px}.statusbar{padding:9px 16px;display:block}.view{padding:24px 16px 40px}.reading-grid,.writing-grid{display:flex;flex-direction:column;gap:24px}.reading-main,.draft-stage{padding:0}.reading-aside{border-left:0;padding:20px 0;border-top:1px solid var(--line)}#sectionList{max-height:180px}h1{font-size:30px}#preview{font-size:17px;line-height:2;max-height:60vh}input:not([type=checkbox]),textarea,select{font-size:16px}button{min-height:44px}.writing-controls{order:-1;border-left:0;padding:0 0 20px;border-bottom:1px solid var(--line)}.writing-controls>h2{font-size:22px}.draft-stage article pre{font-size:17px}#characterName{width:100%}.statusbar #indexStatus:empty{display:none}html{scroll-padding-top:130px}}
+@media(prefers-reduced-motion:no-preference){button{transition:background .15s,color .15s}.view{animation:appear .16s ease-out}@keyframes appear{from{opacity:.65}to{opacity:1}}}
+html[data-theme=dark]{color-scheme:dark;--paper:#1c1c1b;--ink:#e9e7df;--muted:#b0aea5;--line:#494840;--accent:#df8b74;--soft:#2a2926}html[data-theme=dark] input,html[data-theme=dark] select,html[data-theme=dark] textarea{border-color:#68665e}html[data-theme=dark] input::placeholder,html[data-theme=dark] textarea::placeholder{color:#a9a69d}html[data-theme=dark] .primary,html[data-theme=dark] #ask,html[data-theme=dark] #generateWriting,html[data-theme=dark] #pasteImport{background:#9e4432;color:#fff}html[data-theme=dark] #preview mark{background:#634338;color:#fff}html[data-theme=dark] #preview::selection{background:#754b3f;color:#fff}#renameInput{width:100%}
+</style><script>try{document.documentElement.dataset.theme=localStorage.getItem('novel-theme')||'light'}catch{}</script>
+<header class="app-header"><a class="brand" href="#read" aria-label="叙 · 小说阅读与创作">叙</a><span id="bookName">小说阅读与创作</span><nav id="taskNav" class="view-nav" aria-label="任务导航"><button data-view="read">阅读</button><button data-view="write">创作</button><button data-view="people">人物</button></nav><div class="header-actions"><button id="openLibrary">作品</button><button id="openSettings">设置</button><button id="themeToggle" aria-pressed="false">深色</button></div></header>
+<div class="statusbar"><p id="status" role="status">尚未打开作品</p><p id="indexStatus" role="status"></p></div>
+<main><section id="readView" class="view" hidden aria-label="阅读"><div class="reading-grid"><div class="reading-main"><div id="emptyWelcome"><h1>把故事，慢慢读进去。</h1><p>打开本地作品，查阅原文、讨论情节，或从某一句继续写下去。</p><button id="startLibrary" class="primary">打开或导入作品</button></div><h1 id="readerTitle">原文阅读</h1><details id="originalPreview" open><summary>原文阅读 · 每页 20,000 字符</summary><button id="prev">上一页</button> <span id="pageLabel"></span> <button id="next">下一页</button><pre id="preview" tabindex="0" aria-label="小说原文"></pre><p id="previewSelectionStatus" role="status">选中原文后，可确认续写位置。</p><button id="confirmPosition" disabled>确认选中位置</button></details><details id="memoryPanel" hidden><summary id="memoryStatus"></summary><pre id="memoryText"></pre></details><form id="form" tabindex="-1"><label for="question">想问什么？</label><textarea id="question" rows="3" maxlength="4000" required placeholder="例如：沈舟和沈月是什么关系？他们的关系后来发生了什么变化？"></textarea><button id="ask" disabled>询问 Agent</button> <button id="clear" type="button">清空对话</button></form><p id="progress" role="status"></p><section id="chat" aria-live="polite"></section></div><aside class="reading-aside"><h2>原文位置</h2><p class="hint">按导入片段定位</p><details id="readerSearch"><summary>搜索原文</summary><form id="previewSearchForm"><input id="previewSearch" placeholder="搜索原文，例如：第九" aria-label="原文检索关键词"><button>检索跳转</button></form><p id="previewSearchStatus" role="status"></p><div id="previewMatches"></div></details><div id="sectionList"><p class="hint">打开作品后显示</p></div><nav id="floors" aria-label="楼层导航">楼层<button id="floorUp" disabled aria-label="上一条结果">↑</button><div id="floorList">暂无结果</div><button id="floorDown" disabled aria-label="下一条结果">↓</button></nav></aside></div></section>
+<section id="writeView" class="view" hidden aria-label="创作"><div id="writingPanel" class="writing-grid"><div class="draft-stage"><div class="draft-status"><span>灵感与续写</span><span>候选单独保存 · 不覆盖原文</span></div><h1>续写草稿</h1><div class="position-context"><p id="positionLabel">续写位置：文末</p><p id="positionExcerpt"></p><button id="returnToOriginal">查看原文</button></div><h3>续写候选稿</h3><div id="drafts"></div><h3>灵感方案</h3><div id="inspirations"></div></div><aside class="writing-controls"><h2>本次创作</h2><label for="writingIdea">续写方向</label><textarea id="writingIdea" rows="3" placeholder="你的想法、剧情方向或人物要求" aria-label="创作要求"></textarea><label>模式：<select id="writingMode"><option value="inspiration">灵感提供（3个方案）</option><option value="draft">帮我续写</option></select></label><label>目标长度：<select id="writingLength"><option value="500">约500字</option><option value="1000" selected>约1000字</option><option value="2000">约2000字</option></select></label><details open><summary>参考人物</summary><div id="materials"></div></details><label><input id="allowFuture" type="checkbox">允许参考定位点之后的原文</label><button id="generateWriting">生成</button><p id="writingStatus" role="status"></p><details id="writingMore"><summary>更多设置</summary><button id="useSelection">定位续写起点</button><button id="useEnd">恢复文末</button><p class="hint">在阅读页选中一句话后定位。不看后文时，超出范围的自动人物卡不可选；外部人设由你主动选择。</p><label for="adjustment">重写调整</label><textarea id="adjustment" rows="2" placeholder="重写时希望调整什么（可选）" aria-label="调整要求"></textarea><label><input type="checkbox" id="eventCheck">续写实验：先整理已发生事件（多一次模型请求，仅整理定位点前一万字符）</label></details></aside></div></section>
+<section id="peopleView" class="view" hidden aria-label="人物资料"><div class="people-grid"><div><fieldset id="characterPanel" tabindex="-1"><legend>人物资料</legend><select id="extractMode" aria-label="人物提取方式"><option>指定人物</option><option disabled>全书人物（暂未开放）</option></select><input id="characterName" placeholder="输入一个人物姓名" aria-label="人物姓名"><button id="extractCharacter" disabled aria-describedby="characterStatus">提取资料</button><p id="characterStatus" role="status">请先导入或打开作品，再提取人物资料。</p><p class="hint">原文未说明的字段不推测。每条资料审核后才能用于创作。</p><div id="characters"></div></fieldset></div><aside><fieldset><legend>外部人设</legend><input id="settingFile" type="file" accept=".txt,.md,.docx,.pdf" aria-label="上传人设"><div id="settingsList"></div></fieldset></aside></div></section>
+<section id="libraryView" class="view settings-view" aria-label="作品管理"><h1>你的作品</h1><fieldset><legend>作品</legend><select id="projects" aria-label="已保存作品"></select><button id="openProject" disabled>打开作品</button><button id="renameProject" disabled>重命名</button><button id="deleteProject" disabled>删除作品</button><label>新作品名称：<input id="projectName" placeholder="留空使用文件名"></label><p class="hint">每次导入会新建作品，原文与人物资料分别保存在本地 data 文件夹。</p></fieldset><fieldset id="imports"><legend>导入一部作品 · 最多 500 万字符</legend>
+<label>选择文件：<input id="file" type="file" accept=".txt,.md,.docx,.pdf"></label>
+<p class="hint">TXT / Markdown、Word .docx、文字型 PDF。暂不支持 .doc、扫描图片 OCR。按提取后的字符计数，包含标点和空白。</p>
+<details><summary>或者直接粘贴文字</summary><textarea id="paste" rows="6" placeholder="把小说正文粘贴到这里"></textarea><button id="pasteImport" type="button">导入粘贴文字</button></details>
+</fieldset><p class="hint">导入作品后可阅读、提问或续写。配置 embedding 服务时，原文片段会发送到该服务建立索引；问答与创作也可能使用远程模型并产生费用。</p></section>
+<section id="settingsView" class="view settings-view" hidden aria-label="设置"><h1>阅读与创作设置</h1><fieldset><legend>DeepSeek</legend>
+<label>模型：<select id="model"><option value="">使用配置文件中的模型</option><option value="deepseek-flash">DeepSeek Flash</option><option value="deepseek-v4-pro">DeepSeek V4 Pro</option></select></label>
+<p class="hint">配置 embedding 服务后，导入会将全文片段发送给该服务建立索引。Key 从项目根目录的 config.json 读取，不需要在页面填写。提问会将问题、必要对话及查到的原文片段发送给 DeepSeek，产生 API 费用。</p>
+</fieldset><p id="configStatus" class="hint" role="status"></p><details id="promptSettings" tabindex="-1"><summary>长期创作提示词 · 点击修改</summary><fieldset><legend>本机通用设置</legend><p class="hint">本机所有作品通用，保存后自动使用；每份最多10000字符。留空并保存可恢复默认，不改变后文可见范围。</p><label for="inspirationPrompt">灵感提示词</label><textarea id="inspirationPrompt" disabled rows="5" placeholder="生成灵感时遵守的长期要求"></textarea><label for="draftPrompt">写作提示词（续写和重写共用）</label><textarea id="draftPrompt" disabled rows="5" placeholder="粘贴你已调好的写作提示词"></textarea><button id="savePrompts" disabled>保存提示词</button><p id="promptStatus" role="status">正在读取已保存提示词……</p></fieldset></details><fieldset><legend>删除提醒</legend><p id="deletePreferenceStatus" role="status">正在读取删除提醒设置……</p><button id="restoreDeleteWarning" disabled>恢复删除前确认</button></fieldset></section></main>
+<dialog id="renameDialog" aria-labelledby="renameTitle"><h2 id="renameTitle">重命名作品</h2><form id="renameForm"><label for="renameInput">作品名称</label><input id="renameInput" required maxlength="200"><p id="renameStatus" role="status"></p><button type="button" id="cancelRename">取消</button><button id="saveRename">保存名称</button></form></dialog>
+<dialog id="projectDeleteDialog" aria-labelledby="projectDeleteTitle"><h2 id="projectDeleteTitle">删除作品？</h2><p>作品及其人物资料、候选稿将从作品列表移除，移入本地回收目录。不会删除原始导入文件，也不影响其他作品和通用提示词。</p><button id="cancelProjectDelete" autofocus>取消</button><button id="confirmProjectDelete">删除作品</button></dialog>
+<dialog id="deleteDialog" aria-labelledby="deleteTitle" aria-describedby="deleteDescription"><h2 id="deleteTitle">确认删除</h2><p id="deleteDescription">删除后不能恢复。不修改小说原文。</p><label><input id="skipWarning" type="checkbox">不再显示删除提醒</label><div><button id="confirmDelete">删除</button><button id="cancelDelete" autofocus>取消</button></div></dialog>
+<script src="vendor/mammoth.browser.min.js"></script>
+<script src="vendor/pdf.worker.min.js"></script>
+<script src="vendor/pdf.min.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+let projectId = null;
+let session = crypto.randomUUID();
+async function resetMemory() {
+  await post('/memory/clear', {session});
+  session = crypto.randomUUID();
+  $('memoryPanel').hidden = true;
+  $('memoryText').textContent = '';
+}
+
+let history = [], previewText = '', previewPage = 0, imported = false;
+let floors = [], floorIndex = -1;
+function goFloor(index) {
+  showView("read");
+  if (!floors.length) return;
+  floorIndex = Math.max(0, Math.min(index, floors.length - 1));
+  const target = floors[floorIndex];
+  const details = target.closest('details');
+  if (details) details.open = true;
+  target.scrollIntoView({block:'start'});
+  [...$('floorList').children].forEach((button, i) => {
+    if (i === floorIndex) button.setAttribute('aria-current', 'location');
+    else button.removeAttribute('aria-current');
+  });
+  $('floorUp').disabled = floorIndex === 0;
+  $('floorDown').disabled = floorIndex === floors.length - 1;
+}
+function addFloor(target, label) {
+  if (!floors.length) $('floorList').textContent = '';
+  const index = floors.length;
+  floors.push(target);
+  const button = document.createElement('button');
+  button.textContent = String(index + 1); button.title = label;
+  button.setAttribute('aria-label', label); button.onclick = () => goFloor(index);
+  $('floorList').append(button);
+  $('floorDown').disabled = floorIndex >= floors.length - 1;
+}
+function resetFloors() {
+  floors = []; floorIndex = -1; $('floorList').textContent = '暂无结果';
+  $('floorUp').disabled = true; $('floorDown').disabled = true;
+}
+$('floorUp').onclick = () => goFloor(floorIndex - 1);
+$('floorDown').onclick = () => goFloor(floorIndex + 1);
+function busy(value) {
+  $('imports').disabled = value; $('ask').disabled = value || !imported;
+  $('clear').disabled = value; $('model').disabled = value;
+}
+async function post(path, body) {
+  const response = await fetch(path, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)});
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.error || '请求失败');
+  return data;
+}
+async function streamAsk(body, onEvent) {
+  const started = performance.now(), controller = new AbortController();
+  const abort = () => controller.abort();
+  window.addEventListener('pagehide', abort);
+  let reader, finished = false, firstDelta = true;
+  try {
+    let response;
+    try {
+      response = await fetch('/ask', {method:'POST',
+        headers:{'Content-Type':'application/json', 'Accept':'application/x-ndjson'},
+        body:JSON.stringify(body), signal:controller.signal});
+    } catch { throw new Error('连接本地服务失败，请检查服务是否运行。'); }
+    if (!response.ok) {
+      let data;
+      try {data = await response.json();} catch {throw new Error('服务响应无效，请重试。');}
+      throw new Error(data.error || '请求失败');
+    }
+    if (!response.body || !response.headers.get('Content-Type')?.includes('application/x-ndjson'))
+      throw new Error('服务未返回流式响应，请重启更新后的本地服务。');
+    reader = response.body.getReader();
+    const decoder = new TextDecoder('utf-8', {fatal:true});
+    let pending = '';
+    while (true) {
+      let chunk;
+      try { chunk = await reader.read(); }
+      catch { throw new Error('连接中断，回答可能不完整'); }
+      try {pending += decoder.decode(chunk.value, {stream:!chunk.done});}
+      catch {throw new Error('响应编码无效，回答可能不完整');}
+      const lines = pending.split('\n');
+      pending = lines.pop();
+      if (chunk.done && pending.trim()) {lines.push(pending); pending = '';}
+      for (const line of lines) {
+        if (!line.trim()) continue;
+        let event;
+        try { event = JSON.parse(line); }
+        catch { throw new Error('响应格式无效，回答可能不完整'); }
+        if (!event || typeof event !== 'object') throw new Error('响应格式无效，回答可能不完整');
+        if (event.type === 'error') throw new Error(event.message || '回答可能不完整');
+        if (event.type === 'final') {finished = true; return event.payload;}
+        if (event.type === 'delta' || event.type === 'tool') {
+          if (typeof event.text !== 'string') throw new Error('响应格式无效，回答可能不完整');
+          if (firstDelta && event.type === 'delta') {
+            console.info(`stream_first_delta_ms=${(performance.now() - started).toFixed(2)}`);
+            firstDelta = false;
+          }
+          onEvent(event);
+        } else throw new Error('响应格式无效，回答可能不完整');
+      }
+      if (chunk.done) throw new Error('连接中断，回答可能不完整');
+    }
+  } finally {
+    window.removeEventListener('pagehide', abort);
+    if (reader) {try {await reader.cancel();} catch {} reader.releaseLock();}
+    if (!finished) controller.abort();
+  }
+}
+function preview() {
+  const pages = Math.max(1, Math.ceil(previewText.length / 20000));
+  previewPage = Math.max(0, Math.min(previewPage, pages - 1));
+  $('preview').textContent = previewText.slice(previewPage * 20000, (previewPage + 1) * 20000);
+  $('pageLabel').textContent = `${previewPage + 1} / ${pages}`;
+  $('prev').disabled = previewPage === 0; $('next').disabled = previewPage === pages - 1;
+  document.dispatchEvent(new Event('previewRendered'));
+}
+$('prev').onclick = () => {previewPage--; preview();};
+$('next').onclick = () => {previewPage++; preview();};
+async function importBook(name, sections) {
+  const result = await post('/import', {name:$('projectName').value.trim() || name, sections});
+  projectId = result.project;
+  imported = true; resetFloors(); history = []; $('chat').textContent = ''; $('progress').textContent = '';
+  previewText = sections.map(s => s.text).join('\n'); previewPage = 0; preview();
+  $('status').textContent = `已导入：${result.name} · ${result.count.toLocaleString()} 字符 · ${result.chunks.toLocaleString()} 个可查阅片段`;
+  await loadWorkspace(projectId);
+}
+async function pollIndex(pid) {
+  try {
+    const state = await post('/index/status', {project:pid});
+    if (projectId !== pid) return;
+    $('indexStatus').textContent = state.status === 'building'
+      ? `正在建立检索索引 ${state.done}/${state.total}（可继续提问，当前仅用关键词）`
+      : state.status === 'ready' ? '检索索引已就绪。' : state.reason;
+    if (state.status === 'building') setTimeout(() => pollIndex(pid), 1500);
+  } catch { $('indexStatus').textContent = '暂时无法读取索引进度，可继续提问。'; }
+}
+async function readSections(file) {
+    const data = await file.arrayBuffer(), ext = file.name.split('.').pop().toLowerCase();
+    let sections;
+    if (ext === 'txt' || ext === 'md') {
+      let text;
+      if (new Uint8Array(data)[0] === 255 && new Uint8Array(data)[1] === 254) text = new TextDecoder('utf-16le').decode(data);
+      else {
+        try { text = new TextDecoder('utf-8', {fatal:true}).decode(data); }
+        catch { text = new TextDecoder('gb18030').decode(data); }
+      }
+      sections = [{place:'正文', text}];
+    } else if (ext === 'docx') {
+      const result = await mammoth.extractRawText({arrayBuffer:data});
+      sections = [{place:'Word 正文', text:result.value}];
+    } else if (ext === 'pdf') {
+      const pdf = await pdfjsLib.getDocument({data, isEvalSupported:false}).promise;
+      sections = [];
+      try {
+        for (let i = 1; i <= pdf.numPages; i++) {
+          $('status').textContent = `正在读取：${file.name} · 第 ${i}/${pdf.numPages} 页`;
+          const page = await pdf.getPage(i), content = await page.getTextContent();
+          const text = content.items.map(item => item.str + (item.hasEOL ? '\n' : '')).join('');
+          sections.push({place:`PDF 第 ${i} 页`, text});
+        }
+      } finally {await pdf.destroy();}
+    } else throw new Error('请选择 TXT、DOCX 或文字型 PDF。');
+    return sections;
+}
+$('file').onchange = async () => {
+  const file = $('file').files[0]; if (!file) return;
+  busy(true); $('status').textContent = `正在读取：${file.name}`;
+  try {
+    const sections = await readSections(file);
+    $('status').textContent = '正在建立全文片段，请稍候……';
+    await importBook(file.name, sections);
+  } catch (error) { $('status').textContent = `导入失败：${error.message}。${imported ? '此前作品仍保留。' : ''}`; }
+  finally {busy(false); $('file').value = '';}
+};
+$('pasteImport').onclick = async () => {
+  busy(true); $('status').textContent = '正在导入粘贴文字……';
+  try {await importBook('粘贴文字', [{place:'粘贴正文', text:$('paste').value}]);}
+  catch (error) {$('status').textContent = `导入失败：${error.message}。${imported ? '此前作品仍保留。' : ''}`;}
+  finally {busy(false);}
+};
+$('clear').onclick = async () => {await resetMemory(); resetFloors(); history = []; $('chat').textContent = ''; $('progress').textContent = '';};
+$('form').onsubmit = async event => {
+  event.preventDefault();
+  const question = $('question').value.trim();
+  if (!question) return;
+  busy(true); $('progress').textContent = 'Agent 正在查阅原文并回答，可能需要几分钟，请勿重复提交……';
+  const article = document.createElement('article');
+  const title = document.createElement('strong'); title.textContent = `你：${question}`;
+  const answer = document.createElement('p'); answer.className = 'answer';
+  const trace = document.createElement('pre'); trace.className = 'hint';
+  article.append(title, answer, trace); $('chat').append(article);
+  addFloor(article, `回答：${question}`);
+  try {
+    const result = await streamAsk({model:$('model').value, question, history, session, project:projectId}, event => {
+      if (event.type === 'delta') {
+        answer.append(document.createTextNode(event.text));
+        $('progress').textContent = '正在生成回答……';
+      } else trace.append(document.createTextNode(event.text + '\n'));
+    });
+    answer.textContent = '';
+    const checks = result.checks || [];
+    const ranges = checks.filter(c => c.kind !== 'speculation').map(c => [result.answer.indexOf(c.sentence), c.sentence.length])
+      .filter(r => r[0] >= 0).sort((a,b) => a[0]-b[0]);
+    let cursor = 0;
+    for (const [start, length] of ranges) {
+      if (start < cursor) continue;
+      answer.append(document.createTextNode(result.answer.slice(cursor, start)));
+      const mark = document.createElement('mark');
+      mark.textContent = result.answer.slice(start, start + length); answer.append(mark);
+      cursor = start + length;
+    }
+    answer.append(document.createTextNode(result.answer.slice(cursor)));
+    if (checks.length) {
+      const panel = document.createElement('details'), heading = document.createElement('summary');
+      heading.textContent = '核对结果'; panel.append(heading);
+      for (const check of checks) {
+        const row = document.createElement('p');
+        if (check.kind === 'speculation') row.style.color = '#666';
+        row.textContent = `${check.sentence} / 片段 ${check.id} / ${check.kind}：${check.detail}`;
+        panel.append(row);
+      }
+      article.append(panel);
+    }
+    if (result.degraded) {
+      const note = document.createElement('p'); note.className = 'hint';
+      note.textContent = '本次仅使用关键词检索。'; article.append(note);
+    }
+    const panel = document.createElement('details'), heading = document.createElement('summary');
+    heading.textContent = '本次检索'; panel.append(heading);
+    for (const retrieval of result.retrievals || []) {
+      const table = document.createElement('table');
+      const header = table.insertRow();
+      for (const label of ['排名','片段 id','位置','融合分','关键词分','向量分']) {
+        const cell = document.createElement('th'); cell.textContent = label; header.append(cell);
+      }
+      retrieval.hits.forEach((hit, i) => {
+        const row = table.insertRow();
+        for (const value of [i + 1, hit.id, hit.place, hit.score.toFixed(5), hit.kw_score, hit.vec_score.toFixed(5)])
+          row.insertCell().textContent = value;
+      });
+      panel.append(table);
+    }
+    article.append(panel);
+    if (result.notice) {const note = document.createElement('p'); note.textContent = result.notice; article.append(note);}
+    const details = document.createElement('details'), summary = document.createElement('summary');
+    summary.textContent = `本次查阅的原文与过程（${result.evidence.length} 个片段，供核对）`;
+    trace.textContent = result.trace.join('\n');
+    details.append(summary, trace);
+    for (const source of result.evidence) {
+      const evidence = document.createElement('pre'); evidence.className = 'source-fragment';
+      evidence.textContent = `[片段 ${source.id}] ${source.place}\n${source.text}`;
+      details.append(evidence); addFloor(evidence, `原文片段 ${source.id}`);
+    }
+    article.append(details); $('chat').append(article);
+    history.push({role:'user', content:question}, {role:'assistant', content:result.answer});
+    $('question').value = '';
+    const memory = result.memory || {summary:'', covered:0};
+    $('memoryPanel').hidden = !memory.summary;
+    $('memoryStatus').textContent = `前 ${Math.floor(memory.covered / 2)} 轮已压缩`;
+    $('memoryText').textContent = memory.summary;
+    $('progress').textContent = '回答完成。可继续追问；结论请结合原文核对。';
+  } catch (error) {
+    const note = document.createElement('p'); note.className = 'hint';
+    note.textContent = `未完成：${error.message}`; article.append(note);
+    $('progress').textContent = note.textContent;
+  }
+  finally {busy(false);}
+};
+if (location.protocol === 'file:') {
+  $('status').textContent = '此版本需要本地服务：请双击文件夹内的 start.cmd，或更新后的桌面快捷方式。';
+  $('imports').disabled = true;
+}
+fetch('/config').then(r => r.json()).then(state => {
+  $('configStatus').textContent = [state.deepseek ? '' : '未配置 DeepSeek Key，请编辑根目录 config.json', state.embed ? '' : '未配置向量服务，检索将只用关键词'].filter(Boolean).join('；');
+}).catch(() => { $('configStatus').textContent = '无法读取配置状态，请确认已启动新版服务。'; });
+preview();
+</script>
+<script src="workspace.js"></script>
+</html>

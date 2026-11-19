@@ -1,0 +1,9 @@
+{
+  "deepseek_key": "",
+  "deepseek_model": "deepseek-flash",
+  "embed_key": "",
+  "embed_base": "https://api.siliconflow.cn/v1",
+  "embed_model": "BAAI/bge-m3",
+  "top_k": 6,
+  "prefix_chars": 0
+}
