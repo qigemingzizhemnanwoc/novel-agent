@@ -26,9 +26,9 @@ python -X utf8 app.py --open
 
 ## 截图
 
-| 问答与检索面板 | 引用核验 |
+| 问答与检索面板 | 推算标注 |
 | --- | --- |
-| ![问答](docs/qa.png) | ![核验](docs/verify.png) |
+| ![问答](docs/qa.png) | ![推算标注](docs/verify.png) |
 
 ## 配置与运行
 
